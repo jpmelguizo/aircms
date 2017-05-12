@@ -1,0 +1,7 @@
+<h1><%= titulo %></h1>
+
+<%= md(contenido) %>
+
+<% if ruta == 'blog' %>
+  <%= partial '/partials/articles' %>
+<% end %>

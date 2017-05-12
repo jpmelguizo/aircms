@@ -1,0 +1,17 @@
+<article>
+  <h1><%= titulo %></h1>
+  <footer>
+    <time datetime="<%= fecha %>" pubdate><%= DateTime.parse(fecha).strftime("publicado el %d/%m/%Y") %>
+  </footer>
+
+  <%= single_img(imagenes, 0) %>
+  <%= md(contenido) %>
+
+  <% if imagenes.count > 1 %>
+    <div class="galeria">
+      <% (1..imagenes.count - 1).each do |index| %>
+        <%= single_img(imagenes, index) %>
+      <% end %>
+    </div>
+  <% end %>
+</article>

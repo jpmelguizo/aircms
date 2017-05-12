@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>
+      <%= current_resource.url == '/' ? current_resource.data.title : "#{current_resource.locals[:titulo]} | jpmelguizo's blog" %>
+    </title>
+    <link rel="stylesheet" href="/css/styles.css" media="none"
+          onload="if(media!='all')media='all'">
+    <noscript><link rel="stylesheet" href="/css/styles.css"></noscript>
+  </head>
+
+  <body>
+    <a href="#main">skip to main content</a>
+    <%= partial '/partials/header' %>
+    <main id="main">
+      <%= yield %>
+    </main>
+  </body>
+</html>
