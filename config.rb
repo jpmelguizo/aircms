@@ -1,7 +1,7 @@
 require 'redcarpet'
 
-set :relative_links, true
 activate :relative_assets
+set :relative_links, true
 activate :directory_indexes
 
 set :css_dir, 'css'
@@ -18,6 +18,12 @@ helpers do
 
   # creates link with active class in case its href is the current url
   def menu_link(link_text, url, options = {})
+    # github pages fix
+    if environment == :development
+      site_url = ""
+    else
+      site_url = "/aircms"
+    end
     if current_resource.url === "#{url}/" || current_resource.url === "#{url}"
       if options[:class]
         options[:class] << ' active'
@@ -25,7 +31,7 @@ helpers do
         options[:class] = 'active'
       end
     end
-    link_to(link_text, url, options)
+    link_to(link_text, "#{site_url}#{url}", options)
   end
 
   def md(text)
@@ -60,11 +66,17 @@ helpers do
 
   # article list of links
   def articleLinks
+    # github pages
+    if environment == :development
+      site_url = ""
+    else
+      site_url = "/aircms"
+    end
     links = []
     articles = getPagesByType('articulo').sort_by {|r| r.locals[:fecha]}
     articles.each do |article|
       title = article.locals[:titulo]
-      link = link_to(title, "/blog/#{title.parameterize}")
+      link = link_to(title, "#{site_url}/blog/#{title.parameterize}")
       links.push(link)
     end
     links
